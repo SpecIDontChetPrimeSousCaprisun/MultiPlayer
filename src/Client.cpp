@@ -1,4 +1,7 @@
 #include <iostream>
+#include <stdio.h>
+#include <cstring>
+
 #include "Client.hpp"
 
 ENetHost* Client::client;
@@ -45,6 +48,8 @@ int Client::connect(std::string addr, int port) {
 }
 
 int Client::mainLoop() {
+    sendPacket("hello");
+
     while (enet_host_service(client, &event, 1000) > 0) {
 	std::cout << "sefsdf\n";
 	switch(event.type) {
@@ -78,5 +83,14 @@ void Client::disconnect() {
 		std::cout << "Disconnection succeeded\n";
 		break;
 	}
+	
+	enet_packet_destroy(event.packet);
     }
+}
+
+void Client::sendPacket(std::string data) {
+    const char* dataPtr = data.c_str();
+    ENetPacket* packet = enet_packet_create(dataPtr, strlen(dataPtr), ENET_PACKET_FLAG_RELIABLE);
+    
+    enet_peer_send(peer, 0, packet);
 }

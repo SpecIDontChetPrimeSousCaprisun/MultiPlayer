@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "Server.hpp"
 
 int Server::maxClients;
@@ -30,10 +31,9 @@ int Server::init() {
 
 int Server::mainLoop() {
     while (true) {
-	while (enet_host_service(server, &event, 1000) > 0) {
+	while (enet_host_service(server, &event, 0) > 0) {
 	    switch(event.type) {
 		case ENET_EVENT_TYPE_CONNECT:
-		    //std::cout << "New connection from " + event.peer->address.host + ":" + event.peer->address.port + "\n";
 		    std::cout << "New connection\n";
 		    break;
 		case ENET_EVENT_TYPE_RECEIVE:
@@ -48,10 +48,11 @@ int Server::mainLoop() {
 			      << ".\n";
 		    break;
 		case ENET_EVENT_TYPE_DISCONNECT:
-		    //std::cout << event.peer->address.host + ":" + event.peer->address.port + " disconnected\n";
 		    std::cout << "disconnected\n";
 		    break;
 	    }
+	    
+	    enet_packet_destroy(event.packet);
 	}
     }
 

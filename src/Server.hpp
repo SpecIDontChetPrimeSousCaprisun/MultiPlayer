@@ -1,3 +1,5 @@
+#pragma once
+
 #include <enet/enet.h>
 
 class Server {

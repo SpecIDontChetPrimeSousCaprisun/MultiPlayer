@@ -9,6 +9,7 @@ public:
     static int connect(std::string address, int port);
     static int mainLoop();
     static void disconnect();
+    static void sendPacket(std::string data);
 private:
     static ENetHost* client;
     static ENetAddress address;
