@@ -24,7 +24,6 @@ int Client::init() {
 }
 
 int Client::connect(std::string addr, int port) {
-    address.host = ENET_HOST_ANY;
     address.port = port;
     enet_address_set_host(&address, addr.c_str());
     peer = enet_host_connect(client, &address, 1, 0);
@@ -47,9 +46,8 @@ int Client::connect(std::string addr, int port) {
 
 int Client::mainLoop() {
     while (enet_host_service(client, &event, 1000) > 0) {
+	std::cout << "sefsdf\n";
 	switch(event.type) {
-	    case ENET_EVENT_TYPE_NONE:
-		return 0;
 	    case ENET_EVENT_TYPE_RECEIVE:
 		std::cout << "A packet of len " 
 			  << event.packet->dataLength 
@@ -63,6 +61,8 @@ int Client::mainLoop() {
 		break;
 	}
     }
+
+    return 0;
 }
 
 void Client::disconnect() {

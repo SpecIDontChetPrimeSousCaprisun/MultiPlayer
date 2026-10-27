@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Server.hpp"
 
+int Server::maxClients;
 ENetHost* Server::server;
 ENetAddress Server::address;
 ENetEvent Server::event;
@@ -15,7 +16,9 @@ int Server::init() {
     address.host = ENET_HOST_ANY;
     address.port = 7777;
 
-    server = enet_host_create(&address, 5, 1, 0, 0);
+    std::cout << "How many clients should be able to connect at once ?\n";
+    std::cin >> maxClients;
+    server = enet_host_create(&address, maxClients, 1, 0, 0);
 
     if (server == NULL) {
 	std::cout << "Error while initializing server\n";
