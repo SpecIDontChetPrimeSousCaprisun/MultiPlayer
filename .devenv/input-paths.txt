@@ -1,0 +1,10 @@
+/home/chevre/.config/nixpkgs/overlays
+/home/chevre/.config/nixpkgs/overlays.nix
+/home/chevre/Coding/MultiplayerGame/.devenv/bootstrap/bootstrapLib.nix
+/home/chevre/Coding/MultiplayerGame/.devenv/bootstrap/default.nix
+/home/chevre/Coding/MultiplayerGame/.devenv/bootstrap/resolve-lock.nix
+/home/chevre/Coding/MultiplayerGame/.env
+/home/chevre/Coding/MultiplayerGame/devenv.local.nix
+/home/chevre/Coding/MultiplayerGame/devenv.lock
+/home/chevre/Coding/MultiplayerGame/devenv.nix
+/run/user/1000/devenv-8b18fee/processes/native-manager.pid
