@@ -2,6 +2,7 @@
 
 #include "Window.hpp"
 
+Node Window::parent;
 GLFWwindow* Window::window = nullptr;
 int Window::fbWidth = 1600;
 int Window::fbHeight = 1200;
@@ -25,6 +26,7 @@ int Window::init() {
 	return 1;
     }
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(0);
     glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -43,7 +45,8 @@ void Window::mainLoop() {
 	glfwPollEvents();
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	
+	parent.updateChildren();
+	parent.drawChildren();
 
 	glfwSwapBuffers(window);
     }
